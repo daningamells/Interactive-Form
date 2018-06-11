@@ -43,18 +43,42 @@ if ($("input[name='all']").is(':checked')) {
 
   if ($("input[name='js-frameworks']").is(':checked')) {
     totalCost += 100;
-}
+    $("input[name='express']").prop("disabled", true);
+    $("body > div > form > fieldset.activities > label:nth-child(5)").append(`<span class='class'> -  Course Clash</span>`);
+    }
+    else {
+      $("input[name='express']").prop("disabled", false);
+      $('body > div > form > fieldset.activities > label:nth-child(5) > span:nth-child(2)').remove();
+    }
 
     if ($("input[name='js-libs']").is(':checked')) {
       totalCost += 100;
+      $("input[name='node']").prop("disabled", true);
+      $("body > div > form > fieldset.activities > label:nth-child(6)").append(`<span class='class'> -  Course Clash</span>`);
+      }
+      else {
+        $("input[name='node']").prop("disabled", false);
+        $('body > div > form > fieldset.activities > label:nth-child(6) > span:nth-child(2)').remove();
     }
 
       if ($("input[name='express']").is(':checked')) {
         totalCost += 100;
+        $("input[name='js-frameworks']").prop("disabled", true);
+        $("body > div > form > fieldset.activities > label:nth-child(3)").append(`<span class='class'> -  Course Clash</span>`);
+        }
+        else {
+          $("input[name='js-frameworks']").prop("disabled", false);
+          $('body > div > form > fieldset.activities > label:nth-child(3) > span:nth-child(2)').remove();
       }
 
         if ($("input[name='node']").is(':checked')) {
           totalCost += 100;
+          $("input[name='js-libs']").prop("disabled", true);
+          $("body > div > form > fieldset.activities > label:nth-child(4)").append(`<span class='class'> -  Course Clash</span>`);
+          }
+          else {
+            $("input[name='js-libs']").prop("disabled", false);
+            $('body > div > form > fieldset.activities > label:nth-child(4) > span:nth-child(2)').remove();
         }
 
           if ($("input[name='build-tools']").is(':checked')) {
@@ -64,5 +88,6 @@ if ($("input[name='all']").is(':checked')) {
             if ($("input[name='npm']").is(':checked')) {
               totalCost += 100;
             }
-console.log(totalCost);
+var price = `Total cost: ${totalCost}`;
+$('.activities').append(price);
 });
