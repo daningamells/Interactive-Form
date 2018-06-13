@@ -41,42 +41,51 @@ if ($("input[name='all']").is(':checked')) {
   totalCost += 200;
 }
 
+
   if ($("input[name='js-frameworks']").is(':checked')) {
     totalCost += 100;
+    if ($('body > div > form > fieldset.activities > label:nth-child(5) > span').length < 1) {
     $("input[name='express']").prop("disabled", true);
     $("body > div > form > fieldset.activities > label:nth-child(5)").append(`<span class='class'> -  Course Clash</span>`);
     }
-    else {
+  }
+    else if ($('body > div > form > fieldset.activities > label:nth-child(3) > input[type="checkbox"]').not(':checked').length > 0) {
       $("input[name='express']").prop("disabled", false);
       $('body > div > form > fieldset.activities > label:nth-child(5) > span:nth-child(2)').remove();
     }
 
     if ($("input[name='js-libs']").is(':checked')) {
       totalCost += 100;
+      if ($('body > div > form > fieldset.activities > label:nth-child(6) > span').length < 1) {
       $("input[name='node']").prop("disabled", true);
       $("body > div > form > fieldset.activities > label:nth-child(6)").append(`<span class='class'> -  Course Clash</span>`);
       }
-      else {
+    }
+      else if ($('body > div > form > fieldset.activities > label:nth-child(4) > input[type="checkbox"]').not(':checked').length > 0) {
         $("input[name='node']").prop("disabled", false);
         $('body > div > form > fieldset.activities > label:nth-child(6) > span:nth-child(2)').remove();
     }
 
       if ($("input[name='express']").is(':checked')) {
         totalCost += 100;
+        if ($('body > div > form > fieldset.activities > label:nth-child(3) > span').length < 1) {
         $("input[name='js-frameworks']").prop("disabled", true);
         $("body > div > form > fieldset.activities > label:nth-child(3)").append(`<span class='class'> -  Course Clash</span>`);
         }
-        else {
+      }
+        else if ($('body > div > form > fieldset.activities > label:nth-child(5) > input[type="checkbox"]').not(':checked').length > 0) {
           $("input[name='js-frameworks']").prop("disabled", false);
           $('body > div > form > fieldset.activities > label:nth-child(3) > span:nth-child(2)').remove();
       }
 
         if ($("input[name='node']").is(':checked')) {
           totalCost += 100;
+          if ($('body > div > form > fieldset.activities > label:nth-child(4) > span').length < 1) {
           $("input[name='js-libs']").prop("disabled", true);
           $("body > div > form > fieldset.activities > label:nth-child(4)").append(`<span class='class'> -  Course Clash</span>`);
           }
-          else {
+        }
+          else if ($('body > div > form > fieldset.activities > label:nth-child(6) > input[type="checkbox"]').not(':checked').length > 0) {
             $("input[name='js-libs']").prop("disabled", false);
             $('body > div > form > fieldset.activities > label:nth-child(4) > span:nth-child(2)').remove();
         }
@@ -88,6 +97,7 @@ if ($("input[name='all']").is(':checked')) {
             if ($("input[name='npm']").is(':checked')) {
               totalCost += 100;
             }
-var price = `Total cost: ${totalCost}`;
+var price = `<span class='price'>Total cost: ${totalCost}</span>`;
+$('.price').empty();
 $('.activities').append(price);
 });
