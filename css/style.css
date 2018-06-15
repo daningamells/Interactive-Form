@@ -180,7 +180,7 @@ button:hover {
 	}
 }
 
-.error{
+.error, .error2 {
   color: red;
       font-size: 1em;
 

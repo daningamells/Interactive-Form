@@ -131,8 +131,6 @@ $('body > div > form > fieldset:nth-child(4)').change(function() { // Listener o
 
 $("body > div > form > button").click(function(event) { // Listener on submit button
 
-    if ($('#payment > option:nth-child(2)').is(':selected')) { // Only if card option is selected
-
         if ($('#name').val().length < 1) { // Checking if Name is empty
             event.preventDefault(); // Preventing submit action
             if ($('body > div > form > fieldset:nth-child(1) > label:nth-child(2) > div > p.error').length < 1) { // Checking if validation is showing
@@ -146,12 +144,12 @@ $("body > div > form > button").click(function(event) { // Listener on submit bu
 
         if (!validateEmail($('#mail').val()) || $('#mail').val().length < 1) {
             event.preventDefault();
-            if ($('body > div > form > fieldset:nth-child(1) > label:nth-child(4) > div:nth-child(1) > p.error').length < 1) {
-                var emailError = `<div><p class='error'>*Please enter a valid email</p></div>`
+            if ($('body > div > form > fieldset:nth-child(1) > label:nth-child(4) > div > p').length < 1) {
+                var emailError = `<div><p class='error2'>*Please enter a valid email</p></div>`
                 $('body > div > form > fieldset:nth-child(1) > label:nth-child(4)').append(emailError);
             }
         } else {
-            $('body > div > form > fieldset:nth-child(1) > label:nth-child(4) > div:nth-child(1) > p.error').remove();
+            $('p.error2').remove();
 
         }
 
@@ -165,6 +163,8 @@ $("body > div > form > button").click(function(event) { // Listener on submit bu
             $('body > div > form > fieldset.activities > legend > div > p.error').remove();
 
         }
+
+        if ($('#payment > option:nth-child(2)').is(':selected')) { // Only if card option is selected
 
         if ($('#cc-num').val().length < 13 || $('#cc-num').val().length > 16 || $.isNumeric($('#cc-num').val()) === false) {
             event.preventDefault();
@@ -266,4 +266,45 @@ $("#cvv").keyup(function() {
         $('#credit-card > div:nth-child(3) > label > div > p.error').remove();
 
     }
+});
+
+$("#mail").keyup(function() {
+  if (!validateEmail($('#mail').val()) || $('#mail').val().length < 1) {
+      event.preventDefault();
+      if ($('body > div > form > fieldset:nth-child(1) > label:nth-child(4) > div > p').length < 1) {
+          var emailError = `<div><p class='error2'>*Please enter a valid email</p></div>`
+          $('body > div > form > fieldset:nth-child(1) > label:nth-child(4)').append(emailError);
+      }
+    }
+   else {
+
+      $('p.error2').remove();
+  }
+
+});
+
+$(".activities").change(function() {
+  if ($('.activities').find('input[type=checkbox]:checked').length < 1) {
+      event.preventDefault();
+      if ($('body > div > form > fieldset.activities > legend > div > p.error').length < 1) {
+          var selectError = `<div><p class='error'>*Please select at least one activity</p></div>`
+          $('body > div > form > fieldset.activities > legend').append(selectError);
+      }
+  } else {
+      $('body > div > form > fieldset.activities > legend > div > p.error').remove();
+
+  }
+});
+
+$("#name").keyup(function() {
+  if ($('#name').val().length < 1) { // Checking if Name is empty
+      event.preventDefault(); // Preventing submit action
+      if ($('body > div > form > fieldset:nth-child(1) > label:nth-child(2) > div > p.error').length < 1) { // Checking if validation is showing
+          var nameError = `<div><p class='error'>*Please enter a name</p></div>`; // Creating error message
+          $('body > div > form > fieldset:nth-child(1) > label:nth-child(2)').append(nameError); // Append error message
+      }
+  } else {
+      $('body > div > form > fieldset:nth-child(1) > label:nth-child(2) > div > p').remove(); // Remove error if de-selected
+
+  }
 });
