@@ -101,3 +101,91 @@ var price = `<span class='price'>Total cost: ${totalCost}</span>`;
 $('.price').empty();
 $('.activities').append(price);
 });
+
+$('#payment > option:nth-child(2)').attr('selected', true);
+$('body > div > form > fieldset:nth-child(4) > div:nth-child(5) > p').hide();
+$('body > div > form > fieldset:nth-child(4) > div:nth-child(6) > p').hide();
+$('#payment > option:nth-child(1)').prop("disabled", true);
+
+
+$('body > div > form > fieldset:nth-child(4)').change(function(){
+if ($('#payment > option:nth-child(3)').is(':selected')) {
+  $('body > div > form > fieldset:nth-child(4) > div:nth-child(5) > p').show();
+  $('body > div > form > fieldset:nth-child(4) > div:nth-child(6) > p').hide();
+  $('#credit-card').hide();
+  console.log('dsfsdfdsf');
+}
+
+  else if ($('#payment > option:nth-child(4)').is(':selected')) {
+    $('body > div > form > fieldset:nth-child(4) > div:nth-child(5) > p').hide();
+    $('body > div > form > fieldset:nth-child(4) > div:nth-child(6) > p').show();
+    $('#credit-card').hide();
+
+
+}
+});
+
+
+
+$("body > div > form > button").click(function(event) {
+
+
+if ($('#payment > option:nth-child(2)').is(':selected')) {
+
+  if ($('#name').val().length < 1) {
+    event.preventDefault();
+      if ($('body > div > form > fieldset:nth-child(1) > label:nth-child(2) > div > p.error').length < 1) {
+      var nameError = `<div><p class='error'>*Please enter a name</p></div>`
+      $('body > div > form > fieldset:nth-child(1) > label:nth-child(2)').append(nameError);
+    }
+  }
+
+   if( !validateEmail($('#mail').val()) || $('#mail').val().length < 1 ) {
+     event.preventDefault();
+       if ($('body > div > form > fieldset:nth-child(1) > label:nth-child(4) > div:nth-child(1) > p.error').length < 1) {
+       var emailError = `<div><p class='error'>*Please enter a valid email</p></div>`
+       $('body > div > form > fieldset:nth-child(1) > label:nth-child(4)').append(emailError);
+     }
+  }
+
+
+  if ($('.activities').find('input[type=checkbox]:checked').length < 1) {
+    event.preventDefault();
+      if ($('body > div > form > fieldset.activities > legend > div:nth-child(3) > p.error').length < 1) {
+      var selectError = `<div><p class='error'>*Please select at least one activity</p></div>`
+      $('body > div > form > fieldset.activities > legend').append(selectError);
+    }
+  }
+
+  if ($('#cc-num').val().length < 13 || $('#cc-num').val().length > 16 || $.isNumeric($('#cc-num').val()) === false)  {
+    event.preventDefault();
+      if ($('#credit-card > div.col-6.col > label > div:nth-child(3) > p.error').length < 1) {
+      var ccError = `<div><p class='error'>*Please check the credit card number</p></div>`
+      $('#credit-card > div.col-6.col > label').append(ccError);
+    }
+  }
+
+  if ($('#zip').val().length < 5 || $('#zip').val().length > 5 || $.isNumeric($('#zip').val()) === false)  {
+    event.preventDefault();
+      if ($('#credit-card > div:nth-child(2) > label > div:nth-child(2) > p.error').length < 1) {
+      var pcError = `<div><p class='error'>*Please check the Zip Code</p></div>`
+      $('#credit-card > div:nth-child(2) > label').append(pcError);
+    }
+  }
+
+  if ($('#cvv').val().length < 3 || $('#cvv').val().length > 3 || $.isNumeric($('#cvv').val()) === false)  {
+    event.preventDefault();
+      if ($('#credit-card > div:nth-child(3) > label > div:nth-child(3) > p.error').length < 1) {
+      var cvvError = `<div><p class='error'>*Please check the CVV number</p></div>`
+      $('#credit-card > div:nth-child(3) > label').append(cvvError);
+      }
+  }
+}
+
+});
+
+
+function validateEmail($email) {
+  var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+  return emailReg.test( $email );
+}
