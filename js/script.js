@@ -1,12 +1,6 @@
 document.getElementById("name").focus();
 $('#colors-js-puns').hide(); // Hide the colours drop-down
-
-function jobRole() {
-
-    var html = `<input type="text" id="other-title" name="other-title">`; //html to add "Other" field
-    $("body > div > form > fieldset:nth-child(1)").append(html); // appending above html
-    $('#other-title').hide(); // hide "Other" field by default
-}
+$('#other-title').hide();
 
 $('#title').change(function() {
     if ($('#title option:selected').val() === "other") { // Showing the "Other" field
